@@ -1,0 +1,109 @@
+
+laravel new blog
+
+homestead up
+homestead ssh
+ir ate a pasta do projeto
+
+comandos artisan
+
+php artisan route:list
+
+php artisan serve
+
+comandos artisan tem que ser executados
+atraves do ssh no homestead
+
+homestead halt
+
+// Construindo Objetos
+php artisan make:model Post --migration
+
+php artisan make:model Category
+
+// Construir controle
+php artisan make:controller PostController --resource
+precisa do (--resource) para ser um controle com CRUD
+
+// Migraçao
+php artisan make:migration create_categories_table --create=categories
+
+// Apos cada migraçao criada rodar o comando
+php artisan migrate
+
+// Para adicionar o id foreign key
+php artisan make:migration add_category_id_to_posts --table=posts 
+
+php artisan migrate:refresh
+
+SELECT * FROM `posts` LIMIT 5 OFFSET 10;
+
+Banco de Dados e mais rapido com consulta de IDs
+
+php artisan make:migration add_slug_to_users
+
+// Form HTML Helper
+composer require "laravelcollective/html":"^5.8.0"
+
+// Passos para configurar o Form Helper
+https://github.com/LaravelCollective/docs/blob/5.6/html.md
+
+// Escrever queries independentes do SGBD
+composer require doctrine/dbal
+
+// Html Filtro
+composer require mews/purifier
+php artisan vendor:publish --provider="Mews\Purifier\PurifierServiceProvider" // cria o purifier.php no config 
+
+// Upload Images
+composer require intervention/image
+
+// criar migracao para imagem
+php artisan make:migration add_image_col_to_posts --table=posts
+
+indexar colunas do banco de dados acelera o processo de leitura
+de dados da tabela
+
+Resetar senhas
+ir para https://mailtrap.io
+gustavoportfolioti@gmail.com Gport18#
+ir para configurações
+Username:	59830535c49695
+Password:	2fae23740a872f
+Rotas
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Formulario vai para password/reset
+
+Resetar o homestead
+vagrant reload --provision
+
+SSL
+Changing all domains to .test instead of .dev and running vagrant reload --provision did the trick
+
+Hosts
+
+127.0.0.1 autenticacao.test
+127.0.0.1 blog.test
+192.168.10.10 blog.test
+192.168.10.10 autenticacao.test
+
+// N para N
+Nem sempre precisamos de fazer uma migration
+So precisa de migraçao quando for modificar ou criar a base de dados
+So crie o modelo do proximo objeto que vai no N para N relacionamento
+
+Cria o objeto
+php artisan make:model Tag --migration
+
+Roda a migraçao para criar a tabela (Sempre)
+php artisan migrate
+
+// Tabela de relacionamento 
+php artisan make:migration create_post_tag_table 
+
+// select multi erro do professor, nao precisamos usar!
+$('.select2-multi').select2().val({!! json_encode($post->tags()->getRelatedIds()) !!}).trigger('change');
+
