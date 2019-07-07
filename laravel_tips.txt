@@ -67,8 +67,8 @@ de dados da tabela
 Resetar senhas
 ir para https://mailtrap.io
 ir para configurações
-Username:	59830535c49695
-Password:	2fae23740a872f
+Username:	##############
+Password:	##############
 Rotas
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
